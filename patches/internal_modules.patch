@@ -1,8 +1,8 @@
-diff --git a/lib/internal/bootstrap/realm.js b/lib/internal/bootstrap/realm.js
-index 9cb6a8add7..6090473d7d 100644
---- a/lib/internal/bootstrap/realm.js
-+++ b/lib/internal/bootstrap/realm.js
-@@ -209,12 +209,12 @@ const getOwn = (target, property, receiver) => {
+diff --git forkSrcPrefix/lib/internal/bootstrap/realm.js forkDstPrefix/lib/internal/bootstrap/realm.js
+index c11f70dd6bf3298ac848ab5c1bf225bbc7250201..975bf1b35e3d8e534bface618e2895b739424fc6 100644
+--- forkSrcPrefix/lib/internal/bootstrap/realm.js
++++ forkDstPrefix/lib/internal/bootstrap/realm.js
+@@ -210,12 +210,12 @@ const getOwn = (target, property, receiver) => {
  
  const publicBuiltinIds = builtinIds
    .filter((id) =>

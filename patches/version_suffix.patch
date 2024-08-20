@@ -1,8 +1,8 @@
-diff --git a/configure.py b/configure.py
-index 00c8513d68..0794bab18e 100755
---- a/configure.py
-+++ b/configure.py
-@@ -1428,7 +1428,7 @@ def configure_node(o):
+diff --git forkSrcPrefix/configure.py forkDstPrefix/configure.py
+index 9c6c0a56ccac6d29d1085bcdf40740b7a85c584c..18dfea6f76ef3383ff44c905f62863c56612c5fe 100755
+--- forkSrcPrefix/configure.py
++++ forkDstPrefix/configure.py
+@@ -1555,7 +1555,7 @@ def configure_node(o):
    elif sys.platform.startswith('zos'):
      shlib_suffix = '%s.x'
    else:

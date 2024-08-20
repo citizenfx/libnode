@@ -1,76 +1,79 @@
-diff --git a/node.gyp b/node.gyp
-index 4aac64089c..8fa6ab3e81 100644
---- a/node.gyp
-+++ b/node.gyp
-@@ -25,7 +25,7 @@
-     'node_v8_options%': '',
-     'node_enable_v8_vtunejit%': 'false',
-     'node_core_target_name%': 'node',
--    'node_lib_target_name%': 'libnode',
-+    'node_lib_target_name%': 'libnode20',
-     'node_intermediate_lib_type%': 'static_library',
-     'node_builtin_modules_path%': '',
-     'linked_module_files': [
-
-diff --git a/tools/install.py b/tools/install.py
-index 17b0947aac..3e49ce2d74 100755
---- a/tools/install.py
-+++ b/tools/install.py
+diff --git forkSrcPrefix/tools/install.py forkDstPrefix/tools/install.py
+index bf54249b66c0d4e179deaae5a9fd55568e694fe0..ca1ee80b0400a8c5bbf14b44a6eaa6e8666a7a49 100755
+--- forkSrcPrefix/tools/install.py
++++ forkDstPrefix/tools/install.py
 @@ -151,31 +151,31 @@ def files(options, action):
  
    if 'true' == options.variables.get('node_shared'):
      if options.is_win:
 -      action(options, [os.path.join(options.build_dir, 'libnode.dll')], 'bin/libnode.dll')
 -      action(options, [os.path.join(options.build_dir, 'libnode.lib')], 'lib/libnode.lib')
-+      action(options, [os.path.join(options.build_dir, 'libnode20.dll')], 'bin/libnode20.dll')
-+      action(options, [os.path.join(options.build_dir, 'libnode20.lib')], 'lib/libnode20.lib')
++      action(options, [os.path.join(options.build_dir, 'libnode22.dll')], 'bin/libnode22.dll')
++      action(options, [os.path.join(options.build_dir, 'libnode22.lib')], 'lib/libnode22.lib')
      elif sys.platform == 'zos':
        # GYP will output to lib.target; see _InstallableTargetInstallPath
        # function in tools/gyp/pylib/gyp/generator/make.py
        output_prefix = os.path.join(options.build_dir, 'lib.target')
  
 -      output_lib = 'libnode.' + options.variables.get('shlib_suffix')
-+      output_lib = 'libnode20.' + options.variables.get('shlib_suffix')
++      output_lib = 'libnode22.' + options.variables.get('shlib_suffix')
        action(options, [os.path.join(output_prefix, output_lib)], os.path.join('lib', output_lib))
  
 -      # create libnode.x that references libnode.so (C++ addons compat)
-+      # create libnode20.x that references libnode20.so (C++ addons compat)
++      # create libnode22.x that references libnode22.so (C++ addons compat)
        os.system(os.path.dirname(os.path.realpath(__file__)) +
                  '/zos/modifysidedeck.sh ' +
                  abspath(options.install_path, 'lib', output_lib) + ' ' +
 -                abspath(options.install_path, 'lib/libnode.x') + ' libnode.so')
-+                abspath(options.install_path, 'lib/libnode20.x') + ' libnode20.so')
++                abspath(options.install_path, 'lib/libnode22.x') + ' libnode22.so')
  
 -      # install libnode.version.so
 -      so_name = 'libnode.' + re.sub(r'\.x$', '.so', options.variables.get('shlib_suffix'))
-+      # install libnode20.version.so
-+      so_name = 'libnode20.' + re.sub(r'\.x$', '.so', options.variables.get('shlib_suffix'))
++      # install libnode22.version.so
++      so_name = 'libnode22.' + re.sub(r'\.x$', '.so', options.variables.get('shlib_suffix'))
        action(options, [os.path.join(output_prefix, so_name)], options.variables.get('libdir') + '/' + so_name)
  
 -      # create symlink of libnode.so -> libnode.version.so (C++ addons compat)
 -      link_path = abspath(options.install_path, 'lib/libnode.so')
-+      # create symlink of libnode20.so -> libnode20.version.so (C++ addons compat)
-+      link_path = abspath(options.install_path, 'lib/libnode20.so')
++      # create symlink of libnode22.so -> libnode22.version.so (C++ addons compat)
++      link_path = abspath(options.install_path, 'lib/libnode22.so')
        try_symlink(options, so_name, link_path)
      else:
 -      output_lib = 'libnode.' + options.variables.get('shlib_suffix')
-+      output_lib = 'libnode20.' + options.variables.get('shlib_suffix')
++      output_lib = 'libnode22.' + options.variables.get('shlib_suffix')
        action(options, [os.path.join(options.build_dir, output_lib)],
               os.path.join(options.variables.get('libdir'), output_lib))
  
-
-diff --git a/vcbuild.bat b/vcbuild.bat
-index 75f0850b01..3baa17461f 100644
---- a/vcbuild.bat
-+++ b/vcbuild.bat
-@@ -451,8 +451,8 @@ if errorlevel 1 echo Cannot copy nodevars.bat && goto package_error
+diff --git forkSrcPrefix/node.gyp forkDstPrefix/node.gyp
+index 46baef1db3eacec9592296b583d76e3ffcf4de59..8f61828079ec06c3624f6ec83273f5144dfa2221 100644
+--- forkSrcPrefix/node.gyp
++++ forkDstPrefix/node.gyp
+@@ -27,7 +27,7 @@
+     'node_v8_options%': '',
+     'node_enable_v8_vtunejit%': 'false',
+     'node_core_target_name%': 'node',
+-    'node_lib_target_name%': 'libnode',
++    'node_lib_target_name%': 'libnode22',
+     'node_intermediate_lib_type%': 'static_library',
+     'node_builtin_modules_path%': '',
+     'linked_module_files': [
+diff --git forkSrcPrefix/vcbuild.bat forkDstPrefix/vcbuild.bat
+index 428577c5c3d1e9ab55285d7d985fc06ec0ac1dd4..002b7e6558265557ed1c76bb94f9695f7603180d 100644
+--- forkSrcPrefix/vcbuild.bat
++++ forkDstPrefix/vcbuild.bat
+@@ -458,11 +458,11 @@ if errorlevel 1 echo Cannot copy nodevars.bat && goto package_error
  copy /Y ..\tools\msvs\install_tools\*.* %TARGET_NAME%\ > nul
  if errorlevel 1 echo Cannot copy install_tools scripts && goto package_error
  if defined dll (
 -  copy /Y libnode.dll %TARGET_NAME%\ > nul
 -  if errorlevel 1 echo Cannot copy libnode.dll && goto package_error
-+  copy /Y libnode20.dll %TARGET_NAME%\ > nul
-+  if errorlevel 1 echo Cannot copy libnode20.dll && goto package_error
++  copy /Y libnode22.dll %TARGET_NAME%\ > nul
++  if errorlevel 1 echo Cannot copy libnode22.dll && goto package_error
+ 
+-  copy /Y libnode.lib %TARGET_NAME%\ > nul
+-  if errorlevel 1 echo Cannot copy libnode.lib && goto package_error
++  copy /Y libnode22.lib %TARGET_NAME%\ > nul
++  if errorlevel 1 echo Cannot copy libnode22.lib && goto package_error
  
    mkdir %TARGET_NAME%\Release > nul
    copy /Y node.def %TARGET_NAME%\Release\ > nul

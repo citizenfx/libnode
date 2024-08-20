@@ -1,8 +1,8 @@
-diff --git a/common.gypi b/common.gypi
-index efcd8da848..946952d720 100644
---- a/common.gypi
-+++ b/common.gypi
-@@ -439,7 +439,7 @@
+diff --git forkSrcPrefix/common.gypi forkDstPrefix/common.gypi
+index 32a298414b5392f0d083f573f129fdc6dac85cfd..9fb52bf9a6242d0437c4d6c333748899d41e370e 100644
+--- forkSrcPrefix/common.gypi
++++ forkDstPrefix/common.gypi
+@@ -489,7 +489,7 @@
        }],
        [ 'OS in "linux freebsd openbsd solaris android aix os400 cloudabi"', {
          'cflags': [ '-Wall', '-Wextra', '-Wno-unused-parameter', ],
@@ -11,11 +11,11 @@ index efcd8da848..946952d720 100644
          'defines': [ '__STDC_FORMAT_MACROS' ],
          'ldflags': [ '-rdynamic' ],
          'target_conditions': [
-diff --git a/tools/v8_gypfiles/features.gypi b/tools/v8_gypfiles/features.gypi
-index c768d7a0f1..c40752b4b6 100644
---- a/tools/v8_gypfiles/features.gypi
-+++ b/tools/v8_gypfiles/features.gypi
-@@ -318,7 +318,8 @@
+diff --git forkSrcPrefix/tools/v8_gypfiles/features.gypi forkDstPrefix/tools/v8_gypfiles/features.gypi
+index 6e21dac6d70ede1f6dbd6a525fb9f111d6c2eb96..bbe0a0b033f1c48119a5e73874b8d17df9e292a9 100644
+--- forkSrcPrefix/tools/v8_gypfiles/features.gypi
++++ forkDstPrefix/tools/v8_gypfiles/features.gypi
+@@ -328,7 +328,8 @@
  
      # Enable advanced BigInt algorithms, costing about 10-30 KiB binary size
      # depending on platform.
