@@ -1,5 +1,5 @@
 diff --git forkSrcPrefix/common.gypi forkDstPrefix/common.gypi
-index 32a298414b5392f0d083f573f129fdc6dac85cfd..9fb52bf9a6242d0437c4d6c333748899d41e370e 100644
+index 32a298414b5392f0d083f573f129fdc6dac85cfd..4bfda1278552aaf3364b2c9612e205040eb9e464 100644
 --- forkSrcPrefix/common.gypi
 +++ forkDstPrefix/common.gypi
 @@ -489,7 +489,7 @@
@@ -7,7 +7,7 @@ index 32a298414b5392f0d083f573f129fdc6dac85cfd..9fb52bf9a6242d0437c4d6c333748899
        [ 'OS in "linux freebsd openbsd solaris android aix os400 cloudabi"', {
          'cflags': [ '-Wall', '-Wextra', '-Wno-unused-parameter', ],
 -        'cflags_cc': [ '-fno-rtti', '-fno-exceptions', '-std=gnu++17' ],
-+        'cflags_cc': [ '-fno-exceptions' ],
++        'cflags_cc': [ '-fno-exceptions', '-std=gnu++20' ],
          'defines': [ '__STDC_FORMAT_MACROS' ],
          'ldflags': [ '-rdynamic' ],
          'target_conditions': [
