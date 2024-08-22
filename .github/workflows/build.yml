@@ -39,6 +39,7 @@ jobs:
           git apply --reject --whitespace=fix ../patches/rename_output.patch
           git apply --reject --whitespace=fix ../patches/version_suffix.patch
           git apply --reject --whitespace=fix ../patches/build_vs_2022.patch
+          git apply --reject --whitespace=fix ../patches/fix_icu_embedding.patch
 
       - name: Build project
         if: runner.os != 'Windows'
