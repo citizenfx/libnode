@@ -30,16 +30,14 @@ jobs:
             clang clang-dev clang-libs llvm13-dev lld
             libc-dev musl musl-dev musl-dbg gcc g++
 
-      - name: Apply patches
+      - name: Apply all patches
         shell: bash
         working-directory: ./node
         run: |
-          git apply --reject --whitespace=fix ../patches/enable_rtti.patch
-          git apply --reject --whitespace=fix ../patches/internal_modules.patch
-          git apply --reject --whitespace=fix ../patches/rename_output.patch
-          git apply --reject --whitespace=fix ../patches/version_suffix.patch
-          git apply --reject --whitespace=fix ../patches/build_vs_2022.patch
-          git apply --reject --whitespace=fix ../patches/fix_icu_embedding.patch
+          for f in ../patches/*.patch; do
+            echo "Applying $f..."
+            git apply --reject --whitespace=fix "$f"
+          done
 
       - name: Build project
         if: runner.os != 'Windows'
