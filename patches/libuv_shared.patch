@@ -1,0 +1,68 @@
+diff --git a/common.gypi b/common.gypi
+index de83a56672..1f5c1781bb 100644
+--- a/common.gypi
++++ b/common.gypi
+@@ -23,7 +23,7 @@
+     'node_shared_openssl%': 'false',
+ 
+     'node_tag%': '',
+-    'uv_library%': 'static_library',
++    'uv_library%': 'shared_library',
+ 
+     'clang%': 0,
+     'error_on_warn%': 'false',
+diff --git a/deps/uv/uv.gyp b/deps/uv/uv.gyp
+index 6c86c3fa50..589b7b0a31 100644
+--- a/deps/uv/uv.gyp
++++ b/deps/uv/uv.gyp
+@@ -151,6 +151,20 @@
+   },
+ 
+   'targets': [
++  {
++    'target_name': 'libuv_postbuild',
++    'type': 'none',
++    'dependencies': ['libuv'],
++    'copies': [{
++      'destination': '<(PRODUCT_DIR)/lib',
++      'files': [
++        '<(PRODUCT_DIR)/libuv<(STATIC_LIB_SUFFIX)',
++      ],
++      'conditions': [
++        ['OS=="win"', {}],
++      ]
++    }],
++  },
+     {
+       'target_name': 'libuv',
+       'toolsets': ['host', 'target'],
+@@ -246,7 +260,7 @@
+               # This will cause gyp to set soname
+               # Must correspond with UV_VERSION_MAJOR
+               # in include/uv/version.h
+-              'product_extension': 'so.1',
++              'product_extension': 'so',
+             }],
+           ],
+         }],
+diff --git a/node.gyp b/node.gyp
+index 11474953b1..a45c909938 100644
+--- a/node.gyp
++++ b/node.gyp
+@@ -19,7 +19,7 @@
+     'node_shared_zlib%': 'false',
+     'node_shared_http_parser%': 'false',
+     'node_shared_cares%': 'false',
+-    'node_shared_libuv%': 'false',
++    'node_shared_libuv%': 'true',
+     'node_shared_sqlite%': 'false',
+     'node_shared_uvwasi%': 'false',
+     'node_shared_nghttp2%': 'false',
+@@ -863,6 +863,7 @@
+         'deps/ada/ada.gyp:ada',
+         'deps/nbytes/nbytes.gyp:nbytes',
+         'node_js2c#host',
++        'deps/uv/uv.gyp:libuv_postbuild',
+       ],
+ 
+       'sources': [

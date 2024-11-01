@@ -83,7 +83,11 @@ jobs:
             ${{ github.workspace }}/libnode-Windows-x64/libnode22.dll
             ${{ github.workspace }}/libnode-Windows-x64/libnode22.lib
             ${{ github.workspace }}/libnode-Windows-x64/libnode22.pdb
+            ${{ github.workspace }}/libnode-Windows-x64/libuv.dll
+            ${{ github.workspace }}/libnode-Windows-x64/libuv.lib
+            ${{ github.workspace }}/libnode-Windows-x64/libuv.pdb
             ${{ github.workspace }}/libnode-Linux-x64/libnode22.so
+            ${{ github.workspace }}/libnode-Linux-x64/libuv.so
 
       - name: Delete artifacts
         uses: geekyeggo/delete-artifact@v5
