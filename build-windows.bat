@@ -6,4 +6,6 @@ for %%f in (../patches/*.patch) do (
     git apply --reject --whitespace=fix "../patches/%%f"
 )
 
+python ../HandleScope.py src
+
 vcbuild.bat release x64 dll no-cctest clang-cl nonpm

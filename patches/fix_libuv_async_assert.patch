@@ -1,0 +1,16 @@
+diff --git forkSrcPrefix/deps/uv/src/win/async.c forkDstPrefix/deps/uv/src/win/async.c
+index b904676e3a72ddbf8370e2f2111385513c9698f3..352654d5863bd54f717ed3b3f84298889bdc99a7 100644
+--- forkSrcPrefix/deps/uv/src/win/async.c
++++ forkDstPrefix/deps/uv/src/win/async.c
+@@ -71,9 +71,8 @@ int uv_async_send(uv_async_t* handle) {
+     return -1;
+   }
+ 
+-  /* The user should make sure never to call uv_async_send to a closing or
+-   * closed handle. */
+-  assert(!(handle->flags & UV_HANDLE_CLOSING));
++  if (handle->flags & UV_HANDLE_CLOSING)
++    return 0; /* ignore like Unix */
+ 
+   if (!uv__atomic_exchange_set(&handle->async_sent)) {
+     POST_COMPLETION_FOR_REQ(loop, &handle->async_req);
